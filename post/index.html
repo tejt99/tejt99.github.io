@@ -7,7 +7,17 @@
 <script type="text/javascript">
 let params = new URLSearchParams(document.location.search.substring(1));
 let post = params.get("p");
-console.log(post)
+console.log(post);
+
+const Http = new XMLHttpRequest();
+const url='../'+post+'.html';
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = (e) => {
+  console.log(Http.responseText);
+  document.getElementsByTagName('body')[0].innerHTML = Http.responseText;
+}
 </script>
 </body>
 </html>
