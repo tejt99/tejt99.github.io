@@ -17,14 +17,12 @@ Http.send();
 Http.onreadystatechange = (e) => {
 	var postjson = JSON.parse(Http.responseText);
 	console.log(postjson);
-	var keys = Object.keys(postjson);
-	var i;
-	for (i of keys) {
-		var ele = document.getElementsByClass(i);
-		var x;
-		for (x of ele) {
-			x.innerHTML = postjson.i;
-		}
+	for (var i = 0; i < arr.length; i++){
+	  var obj = arr[i];
+	  for (var key in obj){
+	    var value = obj[key];
+	    document.getElementByTagId(key).innerHTML = value;
+	  }
 	}
 }
 </script>
