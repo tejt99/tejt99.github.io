@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>post</title>
+	<title class="title">post</title>
 </head>
-<body>
+<body class="content">
 <script type="text/javascript">
 let params = new URLSearchParams(document.location.search.substring(1));
 let post = params.get("p");
 
 const Http = new XMLHttpRequest();
-Http.open("GET", '/post/post_template.html');
-Http.send();
-
-Http.onreadystatechange = (e) => {
-	console.log(Http.responseText)
-}
-
-
 const url='../posts/'+post+'.json';
 console.log(url)
 Http.open("GET", url);
