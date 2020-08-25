@@ -7,7 +7,6 @@
 <script type="text/javascript">
 let params = new URLSearchParams(document.location.search.substring(1));
 let post = params.get("p");
-console.log(post);
 
 const Http = new XMLHttpRequest();
 const url='../posts/'+post+'.json';
@@ -19,6 +18,7 @@ Http.onreadystatechange = (e) => {
   var postjson = JSON.parse(Http.responseText);
   console.log(postjson)
   document.getElementsByTagName('body')[0].innerHTML = postjson.content;
+  document.getElementsByTagName('title')[0].innerHTML = postjson.title+' | Tiny Blog Post';
 }
 </script>
 </body>
