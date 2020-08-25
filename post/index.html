@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title id="title">post</title>
+	<title class="title">post</title>
 </head>
-<body id="content">
+<body class="content">
 <script type="text/javascript">
 let params = new URLSearchParams(document.location.search.substring(1));
 let post = params.get("p");
@@ -18,15 +18,16 @@ Http.onreadystatechange = (e) => {
 	console.log(Http.responseText);
 	var postjson = JSON.parse(Http.responseText);
 	console.log(postjson);
-	var arr = postjson
-	for (var i = 0; i < arr.length; i++){
-	  var obj = arr[i];
-	  for (var key in obj){
-	    var value = obj[key];
-	    console.log(key);
-	    document.getElementById(key).innerHTML = value;
-	  }
+
+	for (var key in postjson){
+		var value = postjson[key];
+		console.log(key);
+		var ele = document.getElementsByClassName(key);
+		for (var i of ele) {
+			i.innerHTML = value;
+		}
 	}
+	
 }
 </script>
 </body>
