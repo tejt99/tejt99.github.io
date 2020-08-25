@@ -23,6 +23,7 @@ Http.onreadystatechange = (e) => {
 	  var obj = arr[i];
 	  for (var key in obj){
 	    var value = obj[key];
+	    console.log(key);
 	    document.getElementByTagId(key).innerHTML = value;
 	  }
 	}
