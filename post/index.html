@@ -8,27 +8,35 @@
 let params = new URLSearchParams(document.location.search.substring(1));
 let post = params.get("p");
 
-const Http = new XMLHttpRequest();
 const url='../posts/'+post+'.json';
-console.log(url)
-Http.open("GET", url);
-Http.send();
 
-Http.onreadystatechange = (e) => {
-	console.log(Http.responseText);
-	var postjson = JSON.parse(Http.responseText);
-	console.log(postjson);
+fetch(url)
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+      }
 
-	for (var key in postjson){
-		var value = postjson[key];
-		console.log(key);
-		var ele = document.getElementsByClassName(key);
-		for (var i of ele) {
-			i.innerHTML = value;
+      // Examine the text in the response
+      response.json().then(function(data) {
+	    console.log(data);
+
+		for (var key in data){
+			var value = data[key];
+			var ele = document.getElementsByClassName(key);
+			for (var i of ele) {
+				i.innerHTML = value;
+			}
 		}
-	}
-	
-}
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+
 </script>
 </body>
 </html>
