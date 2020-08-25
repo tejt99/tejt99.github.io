@@ -10,7 +10,7 @@ let post = params.get("p");
 console.log(post);
 
 const Http = new XMLHttpRequest();
-const url='/posts/'+post+'.html';
+const url='../posts/'+post+'.html';
 console.log(url)
 Http.open("GET", url);
 Http.send();
