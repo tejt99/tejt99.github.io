@@ -21,13 +21,18 @@ fetch(url)
       response.json().then(function(data) {
 	    console.log(data);
 
-		for (var key in data){
-			var value = data[key];
-			var ele = document.getElementsByClassName(key);
-			for (var i of ele) {
-				i.innerHTML = value;
-			}
-		}
+	    fetch('post_template.html')
+			.then(function(response) {
+				return response.text()
+			}).then(function(template) {
+				for (var key in data){
+					var value = data[key];
+					template = template.replaceAll(`%%${key}%%`, value);
+				}
+				document.write(template);
+			})
+
+
       });
     }
   )
