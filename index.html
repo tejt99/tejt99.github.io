@@ -11,13 +11,6 @@ fetch('posts').then(function (response) {
 }).then(function (html) {
 	// This is the HTML from our response as a text string
 	document.write(html);
-	try {
-		ghPagesDir();
-		console.log(location.host)
-	}
-	catch(err) {
-		console.log(err.message);
-	}
 }).catch(function (err) {
 	// There was an error
 	console.warn('Something went wrong.', err);
