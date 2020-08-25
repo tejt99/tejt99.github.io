@@ -15,6 +15,7 @@ Http.open("GET", url);
 Http.send();
 
 Http.onreadystatechange = (e) => {
+	console.log(Http.responseText);
 	var postjson = JSON.parse(Http.responseText);
 	console.log(postjson);
 	for (var i = 0; i < arr.length; i++){
