@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Feed</title>
+</head>
+<body>
+<script type="text/javascript">
+fetch('posts').then(function (response) {
+	// The API call was successful!
+	return response.text();
+}).then(function (html) {
+	// This is the HTML from our response as a text string
+	document.write(html);
+	try {
+		ghPagesDir();
+		console.log(location.host)
+	}
+	catch(err) {
+		console.log(err.message);
+	}
+}).catch(function (err) {
+	// There was an error
+	console.warn('Something went wrong.', err);
+});
+</script>
+</body>
+</html>

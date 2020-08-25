@@ -1,6 +1,7 @@
 <html>
   <body>
     <script>
+      function ghPagesDir() {
       (async () => {
         const response = await fetch('https://api.github.com/repos/tejt99/tejt99.github.io/contents/posts?ref=master');
         const data = await response.json();
@@ -11,6 +12,7 @@
         htmlString += '</ul>';
         document.getElementsByTagName('body')[0].innerHTML = htmlString;
       })()
+    }
     </script>
   <body>
 </html>
