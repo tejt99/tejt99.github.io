@@ -15,10 +15,17 @@ Http.open("GET", url);
 Http.send();
 
 Http.onreadystatechange = (e) => {
-  var postjson = JSON.parse(Http.responseText);
-  console.log(postjson)
-  document.getElementsByTagName('body')[0].innerHTML = postjson.content;
-  document.getElementsByTagName('title')[0].innerHTML = postjson.title+' | Tiny Blog Post';
+	var postjson = JSON.parse(Http.responseText);
+	console.log(postjson);
+	var keys = Object.keys(postjson);
+	var i;
+	for (i of keys) {
+		var ele = document.getElementsByClass(i);
+		var x;
+		for (x of ele) {
+			x.innerHTML = postjson.i;
+		}
+	}
 }
 </script>
 </body>
