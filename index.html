@@ -2,19 +2,65 @@
 <html>
 <head>
 	<title>Feed</title>
+	<style type="text/css">
+        table, th, td {
+            border: solid 1px #ddd;
+            border-collapse: collapse;
+            padding: 2px 3px;
+        }
+	</style>
 </head>
 <body>
 <script type="text/javascript">
+var posts = []
 fetch('posts').then(function (response) {
 	// The API call was successful!
 	return response.text();
 }).then(function (html) {
-	// This is the HTML from our response as a text string
-	document.write(html);
+
+	const htmlDom = new DOMParser().parseFromString(html, 'text/html');
+	var anchors = htmlDom.getElementsByTagName('a');
+	var counter = 0;
+	for (var files of anchors) {
+		if (files.getAttribute('href').split('.').slice(-1)[0] === 'json') {
+			fetch('posts/'+files.getAttribute('href')).then(function(response) { 
+				// Convert to JSON
+				return response.json();
+			}).then(function(j) {
+				posts.push(j);
+				if (counter === files.getAttribute('href').split('.').slice(-1).length) {
+					main();
+				}
+				counter = counter +1;
+			});
+		}
+	}
 }).catch(function (err) {
 	// There was an error
 	console.warn('Something went wrong.', err);
 });
+
+function main() {
+
+	fetch('feed_template.json').then(function(response) { 
+		// Convert to JSON
+		return response.json();
+	}).then(function(j) {
+
+		var repeated = "";
+		for (var i of posts) {
+			var keys = Object.keys(i)
+			var repeat = j.repeat;
+			for (var x of keys) {
+				repeat = (repeat.replaceAll(`%%${x}%%`, `${i[x]}`));
+			}
+			console.log(repeat)
+			repeated = repeated + repeat;
+		}
+		document.write(j.template.replace('%%repeat%%', repeated));
+	});
+}
 </script>
+    <p id="showData"></p>
 </body>
 </html>
