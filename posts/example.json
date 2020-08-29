@@ -1,6 +1,7 @@
 {
 	"title": "example",
 	"content": "<h1>Example no spaces</h1>",
-	"pub": "22/9/1306",
-	"syn": "example with no spaces"
+	"pub": "1",
+	"syn": "example with no spaces",
+	"tags": ["abc", "123", "qqq"]
 }

@@ -46,18 +46,24 @@ function main() {
 		// Convert to JSON
 		return response.json();
 	}).then(function(j) {
+		fetch('feed_template.html').then(function (response) {
+			// The API call was successful
+			return response.text();
+		}).then(function (html) {
 
-		var repeated = "";
-		for (var i of posts) {
-			var keys = Object.keys(i)
-			var repeat = j.repeat;
-			for (var x of keys) {
-				repeat = (repeat.replaceAll(`%%${x}%%`, `${i[x]}`));
+			var repeated = "";
+			for (var i of posts) {
+				var keys = Object.keys(i)
+				var repeat = j.repeat;
+				for (var x of keys) {
+					repeat = (repeat.replaceAll(`%%${x}%%`, `${i[x]}`));
+				}
+				console.log(repeat)
+				repeated = repeated + repeat;
 			}
-			console.log(repeat)
-			repeated = repeated + repeat;
-		}
-		document.write(j.template.replace('%%repeat%%', repeated));
+			document.write(html.replace('%%repeat%%', repeated));
+			console.log('parsed template')
+		});
 	});
 }
 </script>
